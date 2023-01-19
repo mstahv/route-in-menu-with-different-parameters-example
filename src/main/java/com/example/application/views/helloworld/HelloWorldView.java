@@ -1,6 +1,7 @@
 package com.example.application.views.helloworld;
 
 import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
@@ -12,6 +13,8 @@ import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+
+import java.time.LocalTime;
 
 @PageTitle("Hello World")
 @Route(value = "hello", layout = MainLayout.class)
@@ -40,5 +43,18 @@ public class HelloWorldView extends HorizontalLayout implements HasUrlParameter<
         if(presetValue != null) {
             name.setValue(presetValue);
         }
+        if(isAttached()) {
+            updateViewTitle();
+        }
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        updateViewTitle();
+    }
+
+    private void updateViewTitle() {
+        findAncestor(MainLayout.class).setViewTitle("Hello World view with parameter " + name.getValue() + " opened at " + LocalTime.now());
     }
 }

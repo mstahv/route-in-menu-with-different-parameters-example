@@ -64,14 +64,8 @@ public class MainLayout extends AppLayout {
         return layout;
     }
 
-    @Override
-    protected void afterNavigation() {
-        super.afterNavigation();
-        viewTitle.setText(getCurrentPageTitle());
+    public void setViewTitle(String viewTitle) {
+        this.viewTitle.setText(viewTitle);
     }
 
-    private String getCurrentPageTitle() {
-        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
-        return title == null ? "" : title.value();
-    }
 }
