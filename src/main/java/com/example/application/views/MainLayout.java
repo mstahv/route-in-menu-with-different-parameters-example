@@ -52,7 +52,8 @@ public class MainLayout extends AppLayout {
         // For documentation, visit https://github.com/vaadin/vcf-nav#readme
         AppNav nav = new AppNav();
 
-        nav.addItem(new AppNavItem("Hello World", HelloWorldView.class, "la la-globe"));
+        nav.addItem(new AppNavItem("Hello World:foo" , HelloWorldView.class, "la la-globe", "foo"));
+        nav.addItem(new AppNavItem("Hello World:bar", HelloWorldView.class, "la la-globe", "bar"));
 
         return nav;
     }

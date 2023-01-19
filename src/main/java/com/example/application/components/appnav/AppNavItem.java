@@ -21,6 +21,8 @@ import java.util.Optional;
 @Tag("vcf-nav-item")
 public class AppNavItem extends Component {
 
+    private String optionalParameter;
+
     /**
      * Creates a menu item which does not link to any view but only shows the given
      * label.
@@ -120,10 +122,10 @@ public class AppNavItem extends Component {
      * @param iconClass
      *            the CSS class to use for showing the icon
      */
-    public AppNavItem(String label, Class<? extends Component> view, String iconClass) {
+    public AppNavItem(String label, Class<? extends Component> view, String iconClass, String optionalParameter) {
+        this.optionalParameter = optionalParameter;
         setPath(view);
         setLabel(label);
-
         setIconClass(iconClass);
     }
 
@@ -227,6 +229,9 @@ public class AppNavItem extends Component {
      */
     public AppNavItem setPath(Class<? extends Component> view) {
         String url = RouteConfiguration.forRegistry(getRouter().getRegistry()).getUrl(view);
+        if(optionalParameter != null) {
+            url += "/" + optionalParameter;
+        }
         setPath(url);
         return this;
     }
